@@ -5,6 +5,8 @@ const { ctrlWrapper, HttpError } = require("../../helpers/index");
 const addNewContact =  async (req, res) => {
     const {_id: owner} = req.user;
     const { ...contactData } = req.body;
+    console.log(req.body);
+    
 
     const existingContact = await Contact.findOne({ ...contactData });
 

@@ -7,7 +7,7 @@ const  { schemas }  = require("../../models/user");
 const { register, login, getCurrent, logout} = require("../../controllers/auth/index")
 
 
-router.post("/register", validateBody(schemas.registerSchema), register.register);
+router.post("/signup", validateBody(schemas.registerSchema), register.register);
 
 router.post("/login", validateBody(schemas.loginSchema), login.login);
     

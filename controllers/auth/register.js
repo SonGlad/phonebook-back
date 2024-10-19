@@ -10,6 +10,8 @@ const { SECRET_KEY } = process.env;
 
 const register = async(req, res) => {
     const {email, password} = req.body;
+    console.log(req.body);
+    
 
     const user = await User.findOne({email});
     if(user){
@@ -22,13 +24,13 @@ const register = async(req, res) => {
     const payload = {id: newUser._id};
     const token = jwt.sign(payload, SECRET_KEY, {expiresIn: "23h"});
 
-    await User.findByIdAndUpdate(user._id, { token } );
+    const registeredUser = await User.findByIdAndUpdate(newUser._id, { token } );
 
 
     res.status(201).send({
         token,
-        email: user.email,
-        username: user.username,
+        email: registeredUser.email,
+        username: registeredUser.username,
     })
 };
 
