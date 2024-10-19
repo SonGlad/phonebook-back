@@ -26,24 +26,6 @@ const userSchema = new Schema ({
         type: String,
         default: null,
     },
-    avatarURL: {
-        type: String,
-        // required: true,
-    },
-    verify: {
-        type: Boolean,
-        default: false,
-    },
-    verificationToken: {
-        type: String,
-        required: false,
-        default: null,
-    },
-    role: {
-        type: String,
-        enum: ['guest', 'user', 'administrator', 'sub-administrator', 'developer'],
-        default: 'guest'
-    } 
 
 }, {versionKey:false, timestamps: true});
 
@@ -80,41 +62,10 @@ const loginSchema = Joi.object({
 });
 
 
-const verifySchema = Joi.object({
-    email: Joi.string().pattern(emailRegexp).required().messages({
-        "string.pattern.base": "Invalid email address.",
-        "any.required": "Email is required.",
-    }),
-});
-
-
-const userResetPasswordSchema = Joi.object({
-    email: Joi.string().pattern(emailRegexp).required().messages({
-        "string.pattern.base": "Invalid email address.",
-        "any.required": "Email is required.",
-    }),
-});
-
-
-const validateUpdateInfoSchema = Joi.object({
-    password: Joi.string().min(8).required().messages({
-        "string.min": "Password must be at least 8 characters long.",
-        "any.required": "Password is required.",
-    }),
-    newPassword: Joi.string().min(8).required().messages({
-        "string.min": "Password must be at least 8 characters long.",
-        "any.required": "newPassword is required.",
-    }),
-});
-
-
 
 const schemas = { 
     registerSchema, 
     loginSchema, 
-    verifySchema, 
-    userResetPasswordSchema,
-    validateUpdateInfoSchema,
 };
 const User = model("users", userSchema);
 

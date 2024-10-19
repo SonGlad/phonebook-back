@@ -34,8 +34,6 @@ const login = async(req, res) => {
         token,
         email: user.email,
         username: user.username,
-        avatarURL: user.avatarURL,
-        role: user.role,
     });
 };
 
